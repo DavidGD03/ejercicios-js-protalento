@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Semáforo - Ejercicio 5: Funciones</title>
+</head>
+<body>
+    <img id="semaforoImg" src="./img/luz_verde.jpg" style="width: 200px; height: 300px;">
+    <footer>
+        Hecho por David Rojas (C).
+    </footer>
+    <script>
+        const semaforoImg = document.getElementById('semaforoImg');
+        let currentColorIndex = 0;
+        const colors = ['verde', 'amarillo', 'rojo'];
+
+        function cambiarColorSemaforo() {
+            currentColorIndex = (currentColorIndex + 1) % colors.length;
+            const nextColor = colors[currentColorIndex];
+            const imgSrc = `./img/luz_${nextColor}.jpg`;
+            semaforoImg.src = imgSrc;
+
+            if (nextColor === 'amarillo') {
+                setTimeout(cambiarColorSemaforo, 2000);
+            } else {
+                setTimeout(cambiarColorSemaforo, 5000);
+            }
+        }
+
+        cambiarColorSemaforo();
+    </script>
+</body>
+</html>
