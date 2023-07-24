@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Perfumes Latinos - Empleado del Mes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 10px;
+            cursor: pointer;
+        }
+
+        #resultados {
+            margin-top: 30px;
+            border: 1px solid #ccc;
+            padding: 20px;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: left;
+        }
+
+        #resultados h2 {
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        #resultados p {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Perfumes Latinos - Empleado del Mes</h1>
+    <button onclick="registrarVentas()">Registrar Ventas</button>
+    <button onclick="calcularResultados()">Calcular Resultados</button>
+    <div id="resultados"></div>
+    <script>
+        // Definimos los productos y sus precios
+        const productos = {
+            "Aqua": 200,
+            "Emoción": 180,
+            "Alegría": 160,
+            "Frescura": 150
+        };
+
+        // Creamos arrays para almacenar las ventas de cada vendedor
+        const ventasJuana = [];
+        const ventasPedro = [];
+
+        // Función para registrar las ventas de un vendedor
+        function registrarVentas() {
+            const vendedor = prompt("Ingrese el nombre del vendedor (Juana o Pedro):");
+            const producto = prompt("Ingrese el nombre del producto vendido (Aqua, Emoción, Alegría o Frescura):");
+            const cantidad = prompt("Ingrese la cantidad vendida:");
+
+            if (isNaN(cantidad)) {
+                alert("Error: La cantidad vendida debe ser un valor numérico.");
+                return;
+            }
+
+            if (vendedor === "Juana") {
+                ventasJuana.push({ producto, cantidad: parseInt(cantidad) });
+            } else if (vendedor === "Pedro") {
+                ventasPedro.push({ producto, cantidad: parseInt(cantidad) });
+            } else {
+                alert("Error: Vendedor no reconocido.");
+            }
+        }
+
+        // Función para calcular el total de dinero recolectado por un vendedor
+        function calcularTotalVentas(ventas) {
+            let total = 0;
+            for (const venta of ventas) {
+                total += productos[venta.producto] * venta.cantidad;
+            }
+            return total;
+        }
+
+        // Función para calcular el empleado del mes
+        function calcularEmpleadoDelMes() {
+            const totalJuana = calcularTotalVentas(ventasJuana);
+            const totalPedro = calcularTotalVentas(ventasPedro);
+
+            if (totalJuana === totalPedro) {
+                return "Empate";
+            } else if (totalJuana > totalPedro) {
+                return "Juana";
+            } else {
+                return "Pedro";
+            }
+        }
+
+        // Función para mostrar los resultados en consola
+        function mostrarResultados() {
+            const empleadoDelMes = calcularEmpleadoDelMes();
+
+            const resultadosDiv = document.getElementById("resultados");
+            resultadosDiv.innerHTML = `
+                <h2>Resultados</h2>
+                <p>Total de ventas de Juana: $${calcularTotalVentas(ventasJuana)}</p>
+                <p>Total de ventas de Pedro: $${calcularTotalVentas(ventasPedro)}</p>
+                <p>Empleado del mes: ${empleadoDelMes}</p>
+            `;
+        }
+
+        // Función para calcular los resultados y mostrarlos en consola
+        function calcularResultados() {
+            mostrarResultados();
+        }
+    </script>
+</body>
+</html>
