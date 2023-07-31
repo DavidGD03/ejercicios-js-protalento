@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Cajero Automático</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1 class="heading">CAJERO AUTOMÁTICO</h1>
+    <div class="form-container">
+      <label for="selectCuenta">Seleccionar cuenta:</label>
+      <select id="selectCuenta" class="select-account">
+        <option value="0">Persona 1</option>
+        <option value="1">Persona 2</option>
+        <option value="2">Persona 3</option>
+      </select>
+      <label for="password">Contraseña:</label>
+      <input type="password" id="password" class="password-input">
+      <button onclick="seleccionarCuenta()" class="submit-btn">Ingresar</button>
+    </div>
+    <div id="opciones" style="display: none;">
+      <h2 class="sub-heading">Opciones:</h2>
+      <button onclick="consultarSaldo()" class="option-btn">Consultar saldo</button>
+      <button onclick="ingresarMonto()" class="option-btn">Ingresar monto</button>
+      <button onclick="retirarMonto()" class="option-btn">Retirar monto</button>
+      <br><br>
+      <div id="resultado" class="resultado"></div>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
